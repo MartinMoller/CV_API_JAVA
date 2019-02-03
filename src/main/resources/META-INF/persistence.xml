@@ -8,6 +8,9 @@
     <class>entities.Portfolio</class>
     <class>entities.Work</class>
     <class>entities.Users</class>
+    <class>entities.Language</class>
+    <class>entities.User</class>
+    <class>entities.Skill</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/cvDB?zeroDateTimeBehavior=convertToNull"/>

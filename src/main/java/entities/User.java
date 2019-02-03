@@ -24,17 +24,18 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author martin
  */
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
-    , @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id")
-    , @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name")
-    , @NamedQuery(name = "Users.findByTitel", query = "SELECT u FROM Users u WHERE u.titel = :titel")
-    , @NamedQuery(name = "Users.findByCity", query = "SELECT u FROM Users u WHERE u.city = :city")
-    , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
-    , @NamedQuery(name = "Users.findByPhone", query = "SELECT u FROM Users u WHERE u.phone = :phone")})
-public class Users implements Serializable {
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+    , @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id")
+    , @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name")
+    , @NamedQuery(name = "User.findByTitle", query = "SELECT u FROM User u WHERE u.title = :title")
+    , @NamedQuery(name = "User.findByCity", query = "SELECT u FROM User u WHERE u.city = :city")
+    , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
+    , @NamedQuery(name = "User.findByPhone", query = "SELECT u FROM User u WHERE u.phone = :phone")
+    , @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,8 +51,8 @@ public class Users implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "titel")
-    private String titel;
+    @Column(name = "title")
+    private String title;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -67,21 +68,27 @@ public class Users implements Serializable {
     @NotNull
     @Column(name = "phone")
     private int phone;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 128)
+    @Column(name = "password")
+    private String password;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(Integer id) {
+    public User(Integer id) {
         this.id = id;
     }
 
-    public Users(Integer id, String name, String titel, String city, String email, int phone) {
+    public User(Integer id, String name, String title, String city, String email, int phone, String password) {
         this.id = id;
         this.name = name;
-        this.titel = titel;
+        this.title = title;
         this.city = city;
         this.email = email;
         this.phone = phone;
+        this.password = password;
     }
 
     public Integer getId() {
@@ -100,12 +107,12 @@ public class Users implements Serializable {
         this.name = name;
     }
 
-    public String getTitel() {
-        return titel;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitel(String titel) {
-        this.titel = titel;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getCity() {
@@ -132,6 +139,14 @@ public class Users implements Serializable {
         this.phone = phone;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -142,10 +157,10 @@ public class Users implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Users)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Users other = (Users) object;
+        User other = (User) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -154,7 +169,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Users[ id=" + id + " ]";
+        return "entities.User[ id=" + id + " ]";
     }
     
 }

@@ -24,13 +24,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author martin
  */
 @Entity
-@Table(name = "languages")
+@Table(name = "skill")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Languages.findAll", query = "SELECT l FROM Languages l")
-    , @NamedQuery(name = "Languages.findById", query = "SELECT l FROM Languages l WHERE l.id = :id")
-    , @NamedQuery(name = "Languages.findByName", query = "SELECT l FROM Languages l WHERE l.name = :name")})
-public class Languages implements Serializable {
+    @NamedQuery(name = "Skill.findAll", query = "SELECT s FROM Skill s")
+    , @NamedQuery(name = "Skill.findById", query = "SELECT s FROM Skill s WHERE s.id = :id")
+    , @NamedQuery(name = "Skill.findByName", query = "SELECT s FROM Skill s WHERE s.name = :name")
+    , @NamedQuery(name = "Skill.findByPercent", query = "SELECT s FROM Skill s WHERE s.percent = :percent")})
+public class Skill implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,17 +44,22 @@ public class Languages implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "percent")
+    private int percent;
 
-    public Languages() {
+    public Skill() {
     }
 
-    public Languages(Integer id) {
+    public Skill(Integer id) {
         this.id = id;
     }
 
-    public Languages(Integer id, String name) {
+    public Skill(Integer id, String name, int percent) {
         this.id = id;
         this.name = name;
+        this.percent = percent;
     }
 
     public Integer getId() {
@@ -72,6 +78,14 @@ public class Languages implements Serializable {
         this.name = name;
     }
 
+    public int getPercent() {
+        return percent;
+    }
+
+    public void setPercent(int percent) {
+        this.percent = percent;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -82,10 +96,10 @@ public class Languages implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Languages)) {
+        if (!(object instanceof Skill)) {
             return false;
         }
-        Languages other = (Languages) object;
+        Skill other = (Skill) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -94,7 +108,7 @@ public class Languages implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Languages[ id=" + id + " ]";
+        return "entities.Skill[ id=" + id + " ]";
     }
     
 }
