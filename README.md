@@ -1,2 +1,2 @@
-# CV_API_JAVA
+# REST API made in Java
 Rest Api for my online portfolio.
